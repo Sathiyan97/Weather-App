@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 require("dotenv").config();
 require("./db/mongoose");
-
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

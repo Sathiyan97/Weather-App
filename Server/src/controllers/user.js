@@ -26,7 +26,7 @@ const user_login = async (req, res) => {
 
 
         const token = await user.generateAuthToken();
-        res.send({user, token});
+        res.status(200).send({user, token});
     } catch (e) {
         res.status(400).send(e.message);
     }
