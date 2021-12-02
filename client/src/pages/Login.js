@@ -3,8 +3,7 @@ import "./style.css";
 import CustomInput from "./components/CustomInput";
 import Button from "./components/Button";
 import axios from "axios";
-// import baseURL from "../../Common/baseUrl";
-// import {toast} from "react-toastify";
+
 import { Outlet, Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -22,20 +21,18 @@ export function Login() {
         try {
 
 
-            const response = await fetch("http://localhost:3001/api/userLogin", {
-                method: 'POST', // *GET, POST, PUT, DELETE, etc.
-
-                headers: {
-                    'Content-Type': 'application/json'
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
-                },
-
-                body: JSON.stringify({
-                    email: email,
-                    password: password
-                }) // body data type must match "Content-Type" header
-            });
-            console.log(response.status);
+            const response = await axios.post("http://localhost:3001/api/userLogin", {
+                email: email,
+                password: password
+            },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                }
+            );
+            console.log(response);
             if (response.status === 200) {
                 const {user, token} = response.data;
                 console.log(user,token);
@@ -57,6 +54,9 @@ export function Login() {
 
     return (
         <div className="App">
+            <div className="name">
+                <text>Weather App</text>
+            </div>
             <form className="form">
                 <CustomInput
                     labelText="Email"
